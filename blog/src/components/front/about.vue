@@ -2,8 +2,8 @@
 	section.about-panel.panel.f-spacing.f-spacing-little
 		h4.title ABOUT
 		img.avatar(src="../../assets/images/avatar.jpg")
-		p.intro 偶尔会健忘
-		a.github(href="https://github.com/jide123456")
+		p.intro 世界在我面前臣服，敌人在我眼前倒下
+		a.github(href="https://github.com/xu-snow")
 </template>
 
 <style lang="stylus">

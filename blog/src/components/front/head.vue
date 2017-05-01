@@ -1,8 +1,8 @@
 <template lang="jade">
 	header.g-hd(:class="{'g-hd-1':article}",:style="style")
 		div.intro
-			p.title {{article ? article.title : 'JIDE BLOG'}}
-			p.descript {{article ? article.digest : 'ki mi wa da re'}}
+			p.title {{article ? article.title : 'LinDong BLOG'}}
+			p.descript {{article ? article.digest : '当幸福来敲门'}}
 			p.date(v-if="article") {{article.date + ' | ' + article.classes.name}}
 </template>
 

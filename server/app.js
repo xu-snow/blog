@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // set seeion
 app.use(session({
-    secret: 'this is my secret and fuck you all', 
+    secret: 'LinDong secret', 
     saveUninitialized: false, 
     resave: false,
     cookie: {httpOnly: true}
