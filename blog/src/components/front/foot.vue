@@ -1,6 +1,6 @@
 <template lang="jade">
 	footer.g-footer
-		p Copyright © JIDE 2016
+		p Copyright © LinDong 2017
 </template>
 
 <style lang="stylus">

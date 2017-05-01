@@ -1,7 +1,7 @@
 {
   "name": "myblog",
   "description": "A Vue.js project",
-  "author": "jide",
+  "author": "zhengxu",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --open --inline --hot",
