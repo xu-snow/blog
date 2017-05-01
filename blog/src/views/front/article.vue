@@ -25,7 +25,7 @@
 	export default {
 		data () {
 			return {
-				article: {}
+				article: {classes:{},bg:{}}
 			}
 		},
 		components: {

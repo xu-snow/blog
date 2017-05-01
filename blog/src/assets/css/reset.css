@@ -31,3 +31,6 @@ h6{font-size: 14px;}
 ::-moz-selection {color: #fff; background: #01bee6;}
 ::selection {color: #fff; background: #01bee6;} 
 img {max-width: 100%; height: auto;}
+.wrap111{
+	display: flex;
+}

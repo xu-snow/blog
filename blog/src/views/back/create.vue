@@ -108,6 +108,7 @@
 					let r = handleRes(res, {successMsg: '添加成功'})
 
 					if (r) {
+						
 						_self.$router.push(String(res.result.id))
 						reload(_self)
 					}
@@ -136,9 +137,11 @@
 					_file = e.target.files[0],
 					render = new FileReader()
 
+
 				render.onload = function(e){
 					_self.article.bg.name = _file.name
 					_self.article.bg.ctn = e.target.result
+					
 				}
 
 				render.readAsDataURL(_file)

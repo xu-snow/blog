@@ -31,10 +31,9 @@
 		},
 
 		created () {
-			let _self = this
-
+			
 			resource.classes.get().then(res => {
-				_self.classes=res.classes
+				this.classes=res.classes
 			})
 		}
 	}

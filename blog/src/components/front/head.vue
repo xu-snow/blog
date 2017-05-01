@@ -1,20 +1,19 @@
-<template>
-	<header class="g-hd" :class="{'g-hd-1': article}" v-bind:style="style">
-	    <div class="intro">
-	        <p class="title">{{article ? article.title : 'JIDE BLOG'}}</p>
-	        <p class="descript">{{article ? article.digest : 'ki mi wa da re'}}</p>
-	        <p class="date" v-if="article" >{{article.date + ' | ' + article.classes.name}}</p>
-	    </div>
-	</header>
+<template lang="jade">
+	header.g-hd(:class="{'g-hd-1':article}",:style="style")
+		div.intro
+			p.title {{article ? article.title : 'JIDE BLOG'}}
+			p.descript {{article ? article.digest : 'ki mi wa da re'}}
+			p.date(v-if="article") {{article.date + ' | ' + article.classes.name}}
 </template>
 
 <script>
 	import { isProduction } from '../../req'
 
 	export default {
+		name:"my-head",
 		data () {
 			return {
-				style: {},
+				
 				classesName: ''
 			}
 		},

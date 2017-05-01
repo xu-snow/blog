@@ -15,7 +15,7 @@
 </template>
 
 <script>
-	import myNav from '../../components/back/nav.vue'
+	
 	import classList from '../../components/back/table.vue'
 
 	import { resource } from '../../req'
@@ -32,7 +32,7 @@
 			}
 		},
 		components: {
-			myNav,
+			
 			classList
 		},
 		methods: {
@@ -60,14 +60,18 @@
 			},
 			change (item) {
 				let oldName = item.name,
-					index = item._index
+					index = item._index  //class索引
 
 				UIkit.modal.prompt('请输入新分类名称', oldName, value => {
 					if (oldName != value) {
 						resource.classes.update({id: item.id}, {name: value}).then(res => {
 							let r = handleRes(res, {successMsg: '修改成功'})
 
-							if (r) $('.admin-table .name').eq(index).text(value)
+							if (r) {
+								
+							item.name=value
+
+							}
 						})
 					}
 				})	

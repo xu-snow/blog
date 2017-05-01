@@ -86,7 +86,7 @@ class Cache {
 				element[field] = mirror[element[field]]
 			})
 		} else {
-			temp[field] = mirror[element[field]]
+			temp[field] = mirror[temp[field]]
 		}
 
 		return temp

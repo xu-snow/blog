@@ -2,8 +2,8 @@
 	div
 		div.control.uk-margin-bottom.uk-flex
 			div 筛选 : 
-				div.uk-button-dropdown(data-uk-dropdown="{mode:'click'}", aria-haspopup="true", aria-expanded="false")
-					button.uk-button 全部 
+				div.uk-button-dropdown(data-uk-dropdown="{mode:'click'}")
+					button.uk-button {{filter}} 
 						i.uk-icon-caret-down
 					div.uk-dropdown.uk-dropdown-bottom
 						ul.uk-nav.uk-nav-dropdown
@@ -47,13 +47,18 @@
 		components: {
 			articleList
 		},
+		computed: {
+			filter () {	
+				return this.$route.query.filter || '全部'
+			}
+		},
 		methods: {
 			change (item) {
 				this.$router.push({ path: '/admin/articles/' + item.id})
 			},
 			remove (item) {
 				let params = {id: item.id},
-					data = {data: JSON.stringify({classes: item.classes.id})} 
+					data = {data: JSON.stringify({classes: item.classes.id})}
 
 				resource.articles.delete(params, data).then(res => {
 					handleRes(res)
@@ -76,12 +81,9 @@
 		},
 		watch: {
 			$route () {
-				let _self = this
-
-				_self.articles.data = []
-				resource.articles.get(_self.$route.query)
+				resource.articles.get(this.$route.query)
 					.then(res => {
-						_self.articles.data = res.articles
+						this.articles.data = res.articles
 					})
 			}
 		}

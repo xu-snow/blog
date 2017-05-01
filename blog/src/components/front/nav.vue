@@ -1,6 +1,6 @@
 <template lang="jade">
 	nav.nav.f-flex
-		h6.f-flex-item-1 JIDE Blog
+		h6.f-flex-item-1 LinDong Blog
 		ul.text
 			li
 				router-link(to="/articles") HOME
