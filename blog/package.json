@@ -1,6 +1,7 @@
 {
   "name": "myblog",
   "description": "A Vue.js project",
+  "version": "0.1.0",
   "author": "zhengxu",
   "private": true,
   "scripts": {

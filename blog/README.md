@@ -2,6 +2,10 @@
 
 > A Vue.js blog
 
+`
+    xu
+`
+
 ## Hint
 
 please read and run server folder first `/blog/server`
