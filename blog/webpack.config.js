@@ -1,6 +1,11 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
+
 module.exports = {
   entry: {
     main: './src/main.js',
@@ -12,30 +17,33 @@ module.exports = {
     filename: '[name].build.js'
   },
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },        
+    modules: [path.join(__dirname, 'node_modules')],
+  },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.vue$/,
-        loader: 'vue'
+        use: ["vue-loader"],
+        include: [resolve('src')]
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css','postcss']
+        use: ["style-loader", "css-loader", "postcss-loader"],
+       
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        use: ["babel-loader"],
         exclude: /node_modules/
       },
-      { 
-        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
-        loader: 'url',
-        query: {
-          limit: 50000,
-          name: '[name].[ext]?[hash]'
-        }
+      {
+        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+        use: [{
+          loader: "url-loader",
+          query: {
+            limit: 50000,
+            name: '[name].[ext]?[hash]'
+          }
+        }]
       }
     ]
   },
