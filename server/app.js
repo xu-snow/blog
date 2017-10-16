@@ -41,12 +41,17 @@ app.use(session({
 // development Access-Control-Allow-Origin
 if (!NODE_ENV) {
     app.all('*', function(req, res, next){
-        res.header('Access-Control-Allow-Origin', '*')
+        res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
         res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-
-        next()
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With')
+        res.header('Access-Control-Allow-Credentials',"true")
+        res.header("Content-Type", "application/json;charset=utf-8");
+        // if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
+         next()
+        
     })
 }
+
 
 
 

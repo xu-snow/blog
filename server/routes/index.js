@@ -34,7 +34,7 @@ resourceRouter.use((req, res, next) => {
 		user = req.session.user
 
 	// verify permissions
-	if (process.env.NODE_ENV === 'production') {
+	// if (process.env.NODE_ENV === 'production') {
 		if (method == 'POST' || method == 'PUT' || method == 'DELETE') {
 			if (!user) {
 				res.end(JSON.stringify({
@@ -45,7 +45,7 @@ resourceRouter.use((req, res, next) => {
 				return
 			}
 		}
-	}
+	// }
 
 	next()
 })
