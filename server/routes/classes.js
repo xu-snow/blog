@@ -19,7 +19,7 @@ classes.get = (req, res) => {
 
 
 // update one classes by id
-classes.post = (req, res) => {
+classes.put = (req, res) => {
 	let id = Number(req.params.id),
 		set = req.body
 
@@ -50,7 +50,7 @@ classes.post = (req, res) => {
 
 
 // create new classes
-classes.put = (req, res) => {
+classes.post = (req, res) => {
 	let data = {
 		name: req.body.name,
 		articles: []

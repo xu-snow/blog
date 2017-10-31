@@ -37,7 +37,7 @@ class Cache {
 
 		co(function *(){
 			let { articles, classes } = yield temp
-
+			console.log(articles)
 			classes = _self.toObject(classes)
 			
 			// To convert the references to instances

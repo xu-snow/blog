@@ -7,7 +7,8 @@ const
 	express = require('express'),
 	articles = require('./articles'),
 	classes = require('./classes'),
-	api = require('./api'),
+	login = require('./login'),
+	uploadImage = require('./uploadImage')
 	
 	resourceRouter = express.Router(),
 	apiRouter = express.Router()
@@ -38,7 +39,7 @@ resourceRouter.use((req, res, next) => {
 		if (method == 'POST' || method == 'PUT' || method == 'DELETE') {
 			if (!user) {
 				res.end(JSON.stringify({
-					code: 40001,
+					code: 1,
 					msg: 'limited authority'
 				}), 'utf8')
 
@@ -52,25 +53,27 @@ resourceRouter.use((req, res, next) => {
 
 // /resource/articles
 resourceRouter.get('/articles', articles.get)
-resourceRouter.put('/articles', articles.put)
+resourceRouter.post('/articles', articles.post)
 
 // /resource/articles/:id
 resourceRouter.get('/articles/:id', articles.getOne)
-resourceRouter.post('/articles/:id', articles.post)
+resourceRouter.put('/articles/:id', articles.put)
 resourceRouter.delete('/articles/:id', articles.delete)
 
 // /resource/classes
 resourceRouter.get('/classes', classes.get)
-resourceRouter.put('/classes', classes.put)
+resourceRouter.post('/classes', classes.post)
 
 // /resource/classes/:id
-resourceRouter.post('/classes/:id', classes.post)
+resourceRouter.put('/classes/:id', classes.put)
 
 
 
 // /api/login
-apiRouter.post('/login', api.login)
+apiRouter.post('/login', login.login)
 
+// /
+apiRouter.post('/uploadImage',uploadImage.post)
 
 
 module.exports = {

@@ -67,7 +67,7 @@ articles.getOne = (req, res) => {
 
 
 // upload one article by id
-articles.post = (req, res) => {
+articles.put = (req, res) => {
 	let id = Number(req.params.id),
 		data = JSON.parse(req.body.data),
 		task = [],
@@ -111,7 +111,7 @@ articles.post = (req, res) => {
 
 
 // create new article
-articles.put = (req, res) => {
+articles.post = (req, res) => {
 	let data = JSON.parse(req.body.data)
 
 	// save background image
@@ -126,7 +126,7 @@ articles.put = (req, res) => {
 		return db.insert('articles', data)
 	}).then(r => {
 		let ok = r.result.n
-
+		console.log(r)
 		data = r.ops[0]
 
 		if (!ok) {throw {code: 1, type: 'insertError', msg: '0 data is inserted at articles'}}
