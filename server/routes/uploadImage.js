@@ -1,10 +1,15 @@
 const
   fs = require('fs'),
   path = require('path'),
-  formidable = require('formidable')
+  formidable = require('formidable'),
   folder = path.resolve(__dirname, '../public/upload/img/')
 
-
+// 检查目标目录，不存在则创建
+fs.access(folder, function (err) {
+  if (err) {
+    fs.mkdirSync(folder);
+  }
+});
 
 let uploadImage = {}
 
@@ -44,7 +49,8 @@ uploadImage.post = (req, res) => {
     //   }))
     // }
 
-    var imgName = Math.random() + '.' + extName;
+    // 以当前时间戳对上传文件进行重命名
+    var imgName = Date.now() + '.' + extName;
     //图片写入地址；
     var newPath = path.resolve(folder, imgName);
     //显示地址；
@@ -53,9 +59,6 @@ uploadImage.post = (req, res) => {
     // 将临时文件保存为正式的文件
     fs.rename(files.img.path, newPath, function (err) {
       // 存储结果
-      var result = '';
-      var imgUrl = '';
-
       if (err) {
         // 发生错误
         console.log('fs.rename err');
@@ -68,13 +71,30 @@ uploadImage.post = (req, res) => {
         console.log('fs.rename done');
         res.end(JSON.stringify({
           code: 0,
-          name:`/upload/img/${imgName}`
+          name: imgName,
+          url: `/upload/img/${imgName}`
         }))
       }
     });
     // fs.renameSync(files.img.path, newPath); //重命名
   });
 
+}
+
+
+uploadImage.delete = (req, res) => {
+  let imgName = req.body.name;
+  fs.unlink(path.resolve(folder, imgName), (err) => {
+    if (err) {
+      res.end(JSON.stringify({
+        msg: 'deleteImg error',
+        code: 1
+      }))
+    }
+    res.end(JSON.stringify({
+      code: 0
+    }))
+  })
 }
 
 module.exports = uploadImage

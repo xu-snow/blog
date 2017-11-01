@@ -72,8 +72,9 @@ resourceRouter.put('/classes/:id', classes.put)
 // /api/login
 apiRouter.post('/login', login.login)
 
-// /
+// /api/uploadImage
 apiRouter.post('/uploadImage',uploadImage.post)
+apiRouter.delete('/uploadImage',uploadImage.delete)
 
 
 module.exports = {
