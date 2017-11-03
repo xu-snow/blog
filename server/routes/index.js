@@ -33,16 +33,16 @@ const
 resourceRouter.use((req, res, next) => {
 	let method = req.method,
 		user = req.session.user
-
 	// verify permissions
 	// if (process.env.NODE_ENV === 'production') {
 		if (method == 'POST' || method == 'PUT' || method == 'DELETE') {
 			if (!user) {
-				res.end(JSON.stringify({
-					code: 1,
-					msg: 'limited authority'
-				}), 'utf8')
+				// res.end(JSON.stringify({
+				// 	code: 1,
+				// 	msg: 'limited authority'
+				// }), 'utf8')
 
+				res.status(401).send('无权限')
 				return
 			}
 		}
@@ -71,6 +71,7 @@ resourceRouter.put('/classes/:id', classes.put)
 
 // /api/login
 apiRouter.post('/login', login.login)
+apiRouter.get('/login', login.islogin)
 
 // /api/uploadImage
 apiRouter.post('/uploadImage',uploadImage.post)

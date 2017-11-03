@@ -46,7 +46,7 @@ articles.get = (req, res) => {
 		})
 	}
 
-	res.end(JSON.stringify({
+	res.send(JSON.stringify({
 		code: 0,
 		articles: temp
 	}))
@@ -58,7 +58,7 @@ articles.get = (req, res) => {
 articles.getOne = (req, res) => {
 	let id = req.params.id
 
-	res.end(JSON.stringify({
+	res.send(JSON.stringify({
 		code: 0,
 		article: Cache.findOne('articles', id) || null
 	}))
@@ -99,12 +99,12 @@ articles.put = (req, res) => {
 		if (results[0].result.n) {
 			Cache.reload()
 
-			res.end(JSON.stringify({
+			res.send(JSON.stringify({
 				code: 0
 			}))
 		}
 	}).catch(err => {
-		res.end(JSON.stringify(err))
+		res.send(JSON.stringify(err))
 	})
 }
 
@@ -138,15 +138,13 @@ articles.post = (req, res) => {
 
 		Cache.reload()
 
-		res.end(JSON.stringify({
+		res.send(JSON.stringify({
 			code: 0,
 			result: data
 		}))
 
-		console.log(333)
-
 	}).catch(err => {
-		res.end(JSON.stringify(err))
+		res.send(JSON.stringify(err))
 	})
 }
 
@@ -162,9 +160,9 @@ articles.delete = (req, res) => {
 
 		Cache.reload()
 
-		res.end(JSON.stringify({code: 0}))
+		res.send(JSON.stringify({code: 0}))
 	}).catch(err => {
-		res.end(JSON.stringify(err))
+		res.send(JSON.stringify(err))
 	})
 }
 

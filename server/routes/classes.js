@@ -10,7 +10,7 @@ let classes = {}
 
 // get all classes
 classes.get = (req, res) => {
-	res.end(JSON.stringify({
+	res.send(JSON.stringify({
 		code: 0,
 		classes: Cache.find('classes')
 	}))
@@ -29,7 +29,7 @@ classes.put = (req, res) => {
 			{ returnOriginal: false },
 			( err, result ) => {
 				if (err) {
-					res.end(JSON.stringify({
+					res.send(JSON.stringify({
 						code: -1,
 						err: err
 					}))
@@ -38,7 +38,7 @@ classes.put = (req, res) => {
 				if (result.lastErrorObject.n) {
 					Cache.reload()
 
-					res.end(JSON.stringify({
+					res.send(JSON.stringify({
 						code: 0,
 						result: result.value
 					}))
@@ -63,13 +63,13 @@ classes.post = (req, res) => {
 		if (ok) {
 			Cache.reload()
 
-			res.end(JSON.stringify({
+			res.send(JSON.stringify({
 				code: 0,
 				result: data
 			}))
 		}
 	}).then(err => {
-		res.end(JSON.stringify({
+		res.send(JSON.stringify({
 			code: -1,
 			err: err,
 			errorMsg: 'insertOne error'

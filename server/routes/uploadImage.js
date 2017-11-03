@@ -21,7 +21,7 @@ uploadImage.post = (req, res) => {
   // form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
   form.parse(req, function (err, fields, files) {
     if (err) {
-      res.end(JSON.stringify({
+      res.send(JSON.stringify({
         msg: 'saveImg error',
         code: 1
       }))
@@ -44,7 +44,7 @@ uploadImage.post = (req, res) => {
 
     extName = files.img.type.split('/')[1]
     // if (extName.length == 0) {
-    //   res.end(JSON.stringify({
+    //   res.send(JSON.stringify({
     //     type: '只支持png和jpg格式图片'
     //   }))
     // }
@@ -62,14 +62,14 @@ uploadImage.post = (req, res) => {
       if (err) {
         // 发生错误
         console.log('fs.rename err');
-        res.end(JSON.stringify({
+        res.send(JSON.stringify({
           msg: 'saveImg error',
           code: 1
         }))
       } else {
         // 保存成功
         console.log('fs.rename done');
-        res.end(JSON.stringify({
+        res.send(JSON.stringify({
           code: 0,
           name: imgName,
           url: `/upload/img/${imgName}`
@@ -86,12 +86,12 @@ uploadImage.delete = (req, res) => {
   let imgName = req.body.name;
   fs.unlink(path.resolve(folder, imgName), (err) => {
     if (err) {
-      res.end(JSON.stringify({
+      res.send(JSON.stringify({
         msg: 'deleteImg error',
         code: 1
       }))
     }
-    res.end(JSON.stringify({
+    res.send(JSON.stringify({
       code: 0
     }))
   })
