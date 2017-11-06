@@ -2,7 +2,8 @@ var
     path = require('path'),
     http = require('http'),
     express = require('express'),
-    session = require('express-session'),
+    // session = require('express-session'), // 换成cookie-session
+    cookieSession = require('cookie-session'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -17,8 +18,6 @@ var
 const
     NODE_ENV = process.env.NODE_ENV === 'production',
     port = NODE_ENV ? 80 : 3000
-
-
 
 var app = express()
 
@@ -36,12 +35,20 @@ app.use(cookieParser('LinDong secret'))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // set seeion
-app.use(session({
-    // name:返回客户端的key的名称，默认为connect.sid,也可以自己设置。
-    //与cookieParser中的一致
-    secret: 'LinDong secret', // 一个String类型的字符串，作为服务器端生成session的签名
-    saveUninitialized: true, // 初始化session时是否保存到存储
-    resave: true, // 当客户端并行发送多个请求时，其中一个请求在另一个请求结束时对session进行修改覆盖并保存
+// app.use(session({
+//     // name:返回客户端的key的名称，默认为connect.sid,也可以自己设置。
+//     //与cookieParser中的一致
+//     secret: 'LinDong secret', // 一个String类型的字符串，作为服务器端生成session的签名
+//     saveUninitialized: true, // 初始化session时是否保存到存储
+//     resave: true, // 当客户端并行发送多个请求时，其中一个请求在另一个请求结束时对session进行修改覆盖并保存
+//     cookie: {
+//         httpOnly: true
+//     }
+// }))
+
+app.use(cookieSession({
+    name: 'session',
+    secret: 'LinDong secret',
     cookie: {
         httpOnly: true
     }

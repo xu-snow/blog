@@ -25,7 +25,7 @@ const login = (req, res) => {
 const islogin = (req, res) => {
 	const user = req.session.user
 	if(!user){
-		res.send(JSON.stringify({
+		return res.send(JSON.stringify({
 			islogin:false
 		}))
 	}
