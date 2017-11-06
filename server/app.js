@@ -2,7 +2,7 @@ var
     path = require('path'),
     http = require('http'),
     express = require('express'),
-    // session = require('express-session'), // 换成cookie-session
+     // 换成cookie-session
     cookieSession = require('cookie-session'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
