@@ -2,7 +2,7 @@ var
     path = require('path'),
     http = require('http'),
     express = require('express'),
-     // 换成cookie-session
+    // session = require('express-session'), // 换成cookie-session
     cookieSession = require('cookie-session'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
@@ -56,7 +56,7 @@ app.use(cookieSession({
 
 // development Access-Control-Allow-Origin
 if (!NODE_ENV) {
-    app.all('*', function (req, res, next) {
+    app.all('*', function(req, res, next) {
         res.header('Access-Control-Allow-Origin', 'http://localhost:8080')
         res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
         res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With')
