@@ -49,9 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieSession({
     name: 'session',
     secret: 'LinDong secret',
-    cookie: {
-        httpOnly: true
-    }
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
 // development Access-Control-Allow-Origin
