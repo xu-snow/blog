@@ -2,11 +2,11 @@ const
 	fs = require('fs'),
 	path = require('path')
 	marked = require('marked'),
-	moment = require('moment'),
 	co = require('co')
-
+	moment = require('moment'),
 	Cache = require('../module/cache')(),
-	db = require('../module/db')
+	db = require('../module/db');
+
 
 
 
@@ -21,8 +21,7 @@ const saveImg = imgObj => {
 				path.resolve(__dirname, '../public/upload/articles/', imgObj.name),
 				new Buffer(imgObj.ctn.replace(/^data:image\/\w+;base64,/, ''), 'base64'),
 				err => {
-					console.log(err)
-					if (err) {reject({type: 'saveImg error', err:err})}
+					if (err) {reject({type: 'saveImg error', err:err, code:1})}
 					else {resolve()}
 				}
 			)
@@ -82,6 +81,9 @@ articles.put = (req, res) => {
 	data.article.html = marked(data.article.markdown)
 	data.article.bg.ctn = '/upload/articles/' + data.article.bg.name
 
+	// 修改最后编辑时间
+	data.article.last_time = moment().format('YYYY-MM-DD HH:mm')
+
 	task.push(db.update('articles', {id: id}, {$set: data.article}))
 
 	if (data.changeBg) {
@@ -120,13 +122,13 @@ articles.post = (req, res) => {
 		// pre-process for insert article
 		data.bg.ctn = '/upload/articles/' + data.bg.name
 		data.html = marked(data.markdown)
-		data.date = moment(Number(data.timestamp)).format('YYYY-MM-DD HH:hh')
+		data.date = moment(Number(data.timestamp)).format('YYYY-MM-DD HH:mm')
 
 		// insert article
 		return db.insert('articles', data)
 	}).then(r => {
 		let ok = r.result.n
-		console.log(r)
+
 		data = r.ops[0]
 
 		if (!ok) {throw {code: 1, type: 'insertError', msg: '0 data is inserted at articles'}}

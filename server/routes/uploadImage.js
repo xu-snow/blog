@@ -14,6 +14,10 @@ fs.access(folder, function (err) {
 let uploadImage = {}
 
 uploadImage.post = (req, res) => {
+  if(!req.session.user){
+    return res.status(401).send('无权限')
+  }
+
   var form = new formidable.IncomingForm(); //创建上传表单
   form.encoding = 'utf-8'; //设置编辑
   form.uploadDir = folder //设置上传目录
@@ -21,7 +25,7 @@ uploadImage.post = (req, res) => {
   // form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
   form.parse(req, function (err, fields, files) {
     if (err) {
-      res.send(JSON.stringify({
+      return res.send(JSON.stringify({
         msg: 'saveImg error',
         code: 1
       }))
@@ -83,10 +87,13 @@ uploadImage.post = (req, res) => {
 
 
 uploadImage.delete = (req, res) => {
+  if(!req.session.user){
+    return res.status(401).send('无权限')
+  }
   let imgName = req.body.name;
   fs.unlink(path.resolve(folder, imgName), (err) => {
     if (err) {
-      res.send(JSON.stringify({
+      return res.send(JSON.stringify({
         msg: 'deleteImg error',
         code: 1
       }))
